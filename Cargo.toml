@@ -1,0 +1,10 @@
+[package]
+name = "os"
+version = "0.1.0"
+authors = ["kalium <kalium@kalium.xyz>"]
+edition = "2018"
+
+[build]
+target = "x86_64-blog_os.json"
+
+[dependencies]
