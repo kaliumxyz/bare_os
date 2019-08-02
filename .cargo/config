@@ -6,3 +6,6 @@ rustflags = ["-C", "link-args=/ENTRY:_start /SUBSYSTEM:console"]
 
 [target.'cfg(target_os = "macos")']
 rustflags = ["-C", "link-args=-e __start -static -nostartfiles"]
+
+[build]
+target = "x86_64-os.json"
