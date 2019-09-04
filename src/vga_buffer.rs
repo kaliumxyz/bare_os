@@ -142,3 +142,36 @@ pub fn _print(args: fmt::Arguments) {
     use core::fmt::Write;
     WRITER.lock().write_fmt(args).unwrap();
 }
+
+
+#[cfg(test)]
+use crate::{serial_print, serial_println};
+
+#[test_case]
+fn test_println_simple() {
+    serial_print!("test_println... ");
+    println!("test_printlnsimple output");
+    serial_println!("[ok]");
+}
+
+#[test_case]
+fn test_println_many() {
+    serial_print!("test_println_many... ");
+    for _ in 0..200 {
+        println!("test_printlnsimple_many output");
+    }
+    serial_println!("[ok]");
+}
+
+#[test_case]
+fn test_println_output() {
+    serial_print!("test_println_output... ");
+    let s = "one line of text";
+    println!("{}", s);
+    for (i, c) in s.chars().enumerate() {
+        let screen_char = WRITER.lock().buffer.chars[BUFFER_HEIGHT -2][i].read();
+        assert_eq!(char::from(screen_char.ascii_character), c)
+    }
+
+    serial_println!("[ok]");
+}
