@@ -10,10 +10,12 @@ use core::panic::PanicInfo;
 pub mod serial;
 pub mod vga_buffer;
 pub mod interrupts;
+pub mod gdt;
 
 #[no_mangle]
 pub fn init() {
     interrupts::init_idt();
+    gdt::init();
 }
 
 pub fn test_runner(tests: &[&dyn Fn()]) {
